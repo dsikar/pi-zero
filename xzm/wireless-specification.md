@@ -58,4 +58,12 @@ http://3.9.146.52/filesaving.html
 
 * The same architecture may be used to supply data to mobile, desktop and web panel gui apps, with all the functionality currently provided by desktop apps.
 
+* Shorten cables - at the moment they are cluttering panel.
+
+* Packet building on embedded device.
+
+* Schedulling.
+
+* Embedded device state broadcast - idle, polling, scheduled, etc.
+
 As always open to suggestion.
