@@ -66,4 +66,6 @@ http://3.9.146.52/filesaving.html
 
 * Embedded device state broadcast - idle, polling, scheduled, etc.
 
+* Embedded device logging - need to log every action, specially with respect to scripts running and wifi availability.
+
 As always open to suggestion.
