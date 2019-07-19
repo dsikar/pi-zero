@@ -1,5 +1,5 @@
 from serialdatatransfer import SerialDataTransfer;
-from readers import DataReader, BadPacketReadError;
+from readersBackup import DataReader;
 from byte import Byte;
 
 import sys
@@ -30,7 +30,7 @@ def read(reader, transfer):
 
         if(len(data) == 1):
             if(data[0] == 0x06):
-                time.sleep(0.5);
+                #time.sleep(0.5);
         
                 data = reader.Read();
                 if(len(data) == 0):

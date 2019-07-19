@@ -7,7 +7,7 @@ import time
 import re
 
 from serialdatatransfer import SerialDataTransfer;
-from readers import DataReader, BadPacketReadError;
+from readers import DataReader;
 
 def readerFunction(reader, transfer):
 
@@ -16,25 +16,19 @@ def readerFunction(reader, transfer):
 
     while(True):
         try:
+	    time.sleep(0.0001);
             data = reader.Read();
 	    if(len(data) > 0): #if we have data
 		#if(data.isspace() == False): #and that data is not a whitespace(logic needs to be modified)
                 storedData += data; #Simple appending to existing string is occurring
 		consecutiveRuns = 0;
-	            #print(consecutiveRuns);
-		    #print(data);
-            	    #time.sleep(0.1);
-		    #print str(data),;
-		    #print str(storedData),;
 	    else:
-	        consecutiveRuns = consecutiveRuns + 1
-		#time.sleep(0.1);
-		#print(consecutiveRuns);
+	        consecutiveRuns = consecutiveRuns + 1;
 
-	    if(consecutiveRuns > 20):
+	    if(consecutiveRuns > 100):
 
 		if not str(storedData):
-	            print("Nothing received from panel after  20 attempts");
+	            print("Nothing received from panel after 30 attempts");
 		else:
 		    result = re.sub(' {2,}',' ',str(storedData));
 		    #print(result);
@@ -43,13 +37,11 @@ def readerFunction(reader, transfer):
 		    result = result.strip();
 		    result = urllib2.quote(result);
                     urllib2.urlopen("http://3.9.146.52/com-1-service.php?action="+str(result))
-		    #temp = 
-
 		    #print(storedData);
 		storedData = "";
-		time.sleep(4);
+		time.sleep(2);
 		consecutiveRuns = 0; 
-        except BadPacketReadError as err:
+        except Exception as err:
             print err;
 
 
