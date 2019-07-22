@@ -8,7 +8,7 @@ import datetime
 
 counter = 0;
 consecutiveRuns = 0;
-timeDelay = 0.3
+timeDelay = 0
 
 while(True):
     startTime = datetime.datetime.now();
@@ -25,10 +25,12 @@ while(True):
         payload = subprocess.check_output(shlex.split(action));
         if len(payload) > 1: #for some reason printing an empty payload still constitutes to greater than 0, so we use 1 instead
             print "Payload response to serviced packet : \n"+payload; 
-            reply = "http://3.9.146.52/service.php?action=w&payload=" + payload
+            reply = "http://3.9.146.52/service.php?action=w&payload=" + str(payload)
 	    #reply = urllib2.quote(reply)
+	    print(reply)
             response = urllib2.urlopen(reply)
 	else:
+	    print("this is the payload" + str(payload))
             print "No device recorded for this point",
 
     else:

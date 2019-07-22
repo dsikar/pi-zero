@@ -1,6 +1,6 @@
 ﻿"""
  The module file contain the PTP byte reader from the commport 
-
+ 
 """
 """ ****************************************************************************
 *@brief
@@ -8,6 +8,7 @@
 *  for taking a string of bytes and parse it into a packet.
 **************************************************************************** """
 import threading;
+import time
 from IDataTransfer import IDataTransfer;
 from serialdatatransfer import SerialDataTransfer;
 from frame import SOH, ACK;
@@ -108,6 +109,7 @@ class DataReader(IDataReader,IErrorMessage, IStartableObject, Publisher):
                  self.__isAlive = True;
                
                  while(self.IsRunning()):
+		     time.sleep(0.003)  #put a delay on the read thread, lets not blow the pi up
                      try:
                          if(self.__error != None):
                               break;
@@ -178,8 +180,8 @@ class DataReader(IDataReader,IErrorMessage, IStartableObject, Publisher):
                 try:
                     if(self.IsRunning() == True):
                         byte = self.__rxQueue.get();
-                        if(self.__isStartByte(byte)):
-                            bytes.append(byte);
+                        #if(self.__isStartByte(byte)):
+                        bytes.append(byte);
 
                         if(ord(byte) == SOH):
                             byte = self.__rxQueue.get(True, READ_THREAD_DELAY_TIMEOUT);
@@ -191,11 +193,10 @@ class DataReader(IDataReader,IErrorMessage, IStartableObject, Publisher):
                             for index in range(0, pLength):
                                 byte =  self.__rxQueue.get(True, READ_THREAD_DELAY_TIMEOUT);
                                 bytes.append(byte);
-                        #else:
-                            #bytes =  self._GetInvalidBytes(byte);
-			    #print("This is apparently the wrong start byte : "+byte)
-                            #raise (BadPacketReadError("Invalid start byte read.",bytes,INVALID_PACKET_START_BYTE));
-
+                       #else:
+                           # bytes =  self._GetInvalidBytes(byte);
+                           # raise (BadPacketReadError("Invalid start byte read.",bytes,INVALID_PACKET_START_BYTE));
+                               
                 except Exception as err:
                         bytes = self._GetInvalidBytes(bytes);
                         raise BadPacketReadError(err.message,bytes,TRANSPORT_READ_TIMEOUT);

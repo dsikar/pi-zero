@@ -7,7 +7,7 @@ import time
 import re
 
 from serialdatatransfer import SerialDataTransfer;
-from readers import DataReader;
+from readersBackup import DataReader;
 
 def readerFunction(reader, transfer):
 
@@ -16,7 +16,7 @@ def readerFunction(reader, transfer):
 
     while(True):
         try:
-	    time.sleep(0.0001);
+	    time.sleep(0.01);
             data = reader.Read();
 	    if(len(data) > 0): #if we have data
 		#if(data.isspace() == False): #and that data is not a whitespace(logic needs to be modified)
@@ -25,7 +25,7 @@ def readerFunction(reader, transfer):
 	    else:
 	        consecutiveRuns = consecutiveRuns + 1;
 
-	    if(consecutiveRuns > 100):
+	    if(consecutiveRuns > 30):
 
 		if not str(storedData):
 	            print("Nothing received from panel after 30 attempts");
