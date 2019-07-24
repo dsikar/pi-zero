@@ -5,15 +5,22 @@ import subprocess
 import shlex
 import time
 import datetime
-
+import readID as readIDVar;
+#current script
 counter = 0;
 consecutiveRuns = 0;
 timeDelay = 0
 
+pid = readIDVar.readID();
+pid = pid.strip()
+print("The PI id is " + str(pid))
+
 while(True):
     startTime = datetime.datetime.now();
 
-    response = urllib2.urlopen("http://3.9.146.52/service.php?action=r")
+    readURL = "http://3.9.146.52/service.php?action=r&id=" + str(pid)
+    response = urllib2.urlopen(readURL)
+    #print(readURL);
     content = response.read();
     counter = counter + 1;
     print("\nLoop "+str(counter));
@@ -25,7 +32,8 @@ while(True):
         payload = subprocess.check_output(shlex.split(action));
         if len(payload) > 1: #for some reason printing an empty payload still constitutes to greater than 0, so we use 1 instead
             print "Payload response to serviced packet : \n"+payload; 
-            reply = "http://3.9.146.52/service.php?action=w&payload=" + str(payload)
+            reply = "http://3.9.146.52/service.php?action=w&id="+str(pid)+"&payload=" + str(payload)
+            #reply = "http://3.9.146.52/service.php?action=w"+"&payload=" + str(payload) +"&id=" +str(pid)
 	    #reply = urllib2.quote(reply)
 	    print(reply)
             response = urllib2.urlopen(reply)
