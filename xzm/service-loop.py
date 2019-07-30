@@ -18,7 +18,7 @@ print("The PI id is " + str(pid))
 while(True):
     startTime = datetime.datetime.now();
 
-    readURL = "http://3.9.146.52/service.php?action=r&id=" + str(pid)
+    readURL = "http://3.8.97.201/service.php?action=r&id=" + str(pid)
     response = urllib2.urlopen(readURL)
     #print(readURL);
     content = response.read();
@@ -32,7 +32,7 @@ while(True):
         payload = subprocess.check_output(shlex.split(action));
         if len(payload) > 1: #for some reason printing an empty payload still constitutes to greater than 0, so we use 1 instead
             print "Payload response to serviced packet : \n"+payload; 
-            reply = "http://3.9.146.52/service.php?action=w&id="+str(pid)+"&payload=" + str(payload)
+            reply = "http://3.8.97.201/service.php?action=w&id="+str(pid)+"&payload=" + str(payload)
             #reply = "http://3.9.146.52/service.php?action=w"+"&payload=" + str(payload) +"&id=" +str(pid)
 	    #reply = urllib2.quote(reply)
 	    print(reply)
