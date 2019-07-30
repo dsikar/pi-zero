@@ -27,13 +27,14 @@ Required components should incorporate the following features:
 * A web service able to service http requests
 * A broker service available to the Android app, capable of adding Android requests to a request queue, reading serviced requests queue back to Android app, reading request queue to panel embedded device, and writing serviced requests, fulfilled by panel embedded device, to serviced requests queue. The broker service shall be able to manage both request and service queues, by adding and removing entries
 * A file saving service able to store human readable panel point log entries, supplied by Android app, to a web server log, for future reference may the need arise to inspect such logs or convert to csv for processing (currently stored as txt logs)
-http://3.9.146.52/filesaving.html
+http://3.8.97.201/<panelid>_Data.html
 
 3. Wifi enabled device attached to panel
 
 * A background service process to monitor requests from cloud service, relay point information requests to panel and send back serviced requests to cloud service. The frequency of requests shall be such that for any given Android app request, the response (serviced request) shall have a latency of no more than 1.5 seconds. During periods when no requests are being made, the service shall wind down, with a longer latency between requests, and as soon as requests are being made, the frequency shall increase to observe required operational latency.
 * An adequate library capable of querying the panel via RS232 com port 2
 * A configuration option to connect directly, bypassing cloud service, to the embedded device acting as a hot spot.
+* The embedded device shall be capable of connecting concurrently to RS232 com 1 port to collect print outs supplied by panel and make such information available as required, to Android app, desktop app or web server.
 
 ## Flow chart
 
@@ -52,9 +53,7 @@ http://3.9.146.52/filesaving.html
 ```
 ## Future developments
 
-* The embedded device shall be capable of connecting concurrently to RS232 com 1 port to collect print outs supplied by panel and make such information available as required, to Android app, desktop app or web server.
-
-* Multiple client architecture such that 1 * x embedded devices can communicate to 1 * x android phones through the use of singular broker server. This would be the ideal next step after the milestone demo.
+* Multiple client architecture such that 1 * x embedded devices can communicate to 1 * x android phones through the use of single broker server. This would be the ideal next step after the milestone demo.
 
 * The same architecture may be used to supply data to mobile, desktop and web panel gui apps, with all the functionality currently provided by desktop apps.
 
