@@ -1,4 +1,3 @@
-
 String[] faultCodes = {
     "Clear",
     "Loop Fault Shutdown",

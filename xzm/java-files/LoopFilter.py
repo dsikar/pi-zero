@@ -1,15 +1,9 @@
-package mx_packets;
+class LoopFilter:
 
-/**
- * Used for macro
- */
-public class LoopFilter {
+    def getLoopByte(String loopVal):
 
-
-    public Byte getLoopByte(String loopVal) {
-
-        Byte loopByte;
-        switch(loopVal) {
+        loopByte = 0;
+        switch(loopVal) :
             case "Loop A":
                 loopByte = 1;
                 break;
@@ -37,13 +31,13 @@ public class LoopFilter {
             default:
                 loopByte = 0;
                 break;
-        }
-        return loopByte;
-    }
-    public String getLoopString(int loopByte){
 
-        String loopString = "";
-        switch(loopByte) {
+        return loopByte;
+
+    def getLoopString(int loopByte):
+
+        loopString = "";
+        switch(loopByte):
 
             case 1:
                 loopString = "Loop A";
@@ -72,7 +66,5 @@ public class LoopFilter {
             default:
                 loopString = "Loop Unknown";
                 break;
-        }
+
         return loopString;
-    }
-}
